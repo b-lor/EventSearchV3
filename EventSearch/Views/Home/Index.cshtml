@@ -74,14 +74,14 @@
 
 <style>
 
-        #map {
-            height: 600px;
-            width: 1200px;
-        }
-    </style>
-    <div class="row">
-        <div id="map"></div>
-        <script>
+    #map {
+        height: 600px;
+        width: 1200px;
+    }
+</style>
+<div class="row">
+    <div id="map"></div>
+    <script>
             var map;
                     function initMap() {
                         var latLng = new google.maps.LatLng(43.0389, -87.9065);
@@ -122,23 +122,22 @@
                         var infowindow = new google.maps.InfoWindow();
 
 
-                        google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+                        google.maps.event.addListener(marker, 'click', (function (marker, content) {
                             return function () {
-                                infowindow.close();
                                 infowindow.setContent(content);
                                 infowindow.open(map, marker);
                             };
 
-                        })(marker, content, infowindow));
+                        })(marker, content));
 
             </text>
             }
 
 
-                    }
+            }
 
-        </script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPd_kaIJibv8PaW5y-FmYqXnxuD1jRT14&callback=initMap">
-        </script>
-    </div>
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPd_kaIJibv8PaW5y-FmYqXnxuD1jRT14&callback=initMap">
+    </script>
+</div>
