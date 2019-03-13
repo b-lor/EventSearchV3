@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EventSearch.Models;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+
 
 namespace EventSearch.Controllers
 {
@@ -12,27 +16,35 @@ namespace EventSearch.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            string apiKey = "kdRmzVqLVwJBfRnB";
+            string location = "Milwaukee";
+            string category = "music";
+            string startDate = "2019031600";
+            string endDate = "2019031600";
+            int pageSize = 100;
+
+
+            //WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=Milwaukee&q=Music");
+
+            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + location + "&q=" + category + "&date=" + startDate + "-" + endDate + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
+
+
+            WebResponse response = request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+
+            StreamReader reader = new StreamReader(stream);
+
+            string responseFromServer = reader.ReadToEnd();
+
+            JObject parsedString = JObject.Parse(responseFromServer);
+
+            EventfulMain eventful = parsedString.ToObject<EventfulMain>();
+
+            return View(eventful);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
