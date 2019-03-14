@@ -17,6 +17,7 @@ namespace EventSearch.Controllers
 
         public string Location { get; set; }
         public string Category { get; set; }
+        public int Miles { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
@@ -26,7 +27,7 @@ namespace EventSearch.Controllers
         }
 
 
-        public IActionResult Search(string location, string category, DateTime? startDate, DateTime? endDate)
+        public IActionResult Search(string location, string category, int miles, DateTime? startDate, DateTime? endDate)
         {
             string apiKey = "kdRmzVqLVwJBfRnB";
             int pageSize = 100;
@@ -39,6 +40,11 @@ namespace EventSearch.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 Category = category;
+            }
+
+            if (miles > 0)
+            {
+                Miles = miles;
             }
 
             if (startDate.HasValue)
