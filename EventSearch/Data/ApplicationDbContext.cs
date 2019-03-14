@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EventSearch.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,8 @@ namespace EventSearch.Data
             : base(options)
         {
         }
+        public DbSet<Citites> Cities { get; set; }
+
+
     }
 }
