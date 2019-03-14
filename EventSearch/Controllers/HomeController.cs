@@ -57,7 +57,7 @@ namespace EventSearch.Controllers
                 EndDate = (DateTime)endDate;
             }
 
-            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
+            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&within=" + Miles + "&units=miles&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
 
 
 
