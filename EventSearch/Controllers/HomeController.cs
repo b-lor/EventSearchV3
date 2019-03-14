@@ -8,25 +8,51 @@ using EventSearch.Models;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
-
+using Microsoft.AspNetCore.Http;
 
 namespace EventSearch.Controllers
 {
     public class HomeController : Controller
     {
+
+        public string Location { get; set; }
+        public string Category { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        public IActionResult Search(string location, string category, DateTime? startDate, DateTime? endDate)
+        {
             string apiKey = "kdRmzVqLVwJBfRnB";
-            string location = "Milwaukee";
-            string category = "music";
-            string startDate = "2019031600";
-            string endDate = "2019031600";
             int pageSize = 100;
 
+            if (!string.IsNullOrEmpty(location))
+            {
+                Location = location;
+            }
 
-            //WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=Milwaukee&q=Music");
+            if (!string.IsNullOrEmpty(category))
+            {
+                Category = category;
+            }
 
-            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + location + "&q=" + category + "&date=" + startDate + "-" + endDate + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
+            if (startDate.HasValue)
+            {
+                StartDate = (DateTime)startDate;
+            }
+
+            if (endDate.HasValue)
+            {
+                EndDate = (DateTime)endDate;
+            }
+
+            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
+
 
 
             WebResponse response = request.GetResponse();
@@ -43,8 +69,6 @@ namespace EventSearch.Controllers
 
             return View(eventful);
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
