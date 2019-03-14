@@ -1,29 +1,45 @@
-music
-conference
-comedy
-learning_education
-family_fun_kids
-festivals_parades
-movies_film
-food
-fundraisers
-art
-support
-holiday
-books
-attractions
-community
-business
-singles_social
-schools_alumni
-clubs_associations
-outdoors_recreation
-performing_arts
-animals
-politics_activism
-sales
-science
-religion_spirituality
-sports
-technology
-other
+SET IDENTITY_INSERT dbo.Category ON
+
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('01', 'activism');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('02', 'alumni');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('03', 'animals');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('04', 'art');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('05', 'arts');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('06', 'associations');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('07', 'attractions');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('08', 'books');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('09', 'business');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('10', 'clubs');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('11', 'comedy');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('12', 'community');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('13', 'conference');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('14', 'education');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('15', 'family');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('16', 'festivals');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('17', 'film');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('18', 'food');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('19', 'fun');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('20', 'fundraisers');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('21', 'holiday');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('22', 'kids');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('23', 'learning');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('24', 'movies');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('25', 'music');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('26', 'other');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('27', 'outdoors');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('28', 'parades');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('29', 'performing');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('30', 'politics');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('31', 'recreation');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('32', 'religion');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('33', 'sales');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('34', 'schools');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('35', 'science');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('36', 'singles');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('37', 'social');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('38', 'spirituality');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('39', 'sports');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('40', 'support');
+INSERT INTO dbo.Category (CategoryId, CategoryName) VALUES  ('41', 'technology');
+
+SET IDENTITY_INSERT dbo.Category OFF

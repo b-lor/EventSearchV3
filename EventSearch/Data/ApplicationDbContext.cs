@@ -17,7 +17,7 @@ namespace EventSearch.Data
         public DbSet<Cuisine> Cuisine { get; set; }
         public DbSet<Establishment> Establishment { get; set; }
 
-
+        public DbSet<Category> Category { get; set; }
 
     }
 }
