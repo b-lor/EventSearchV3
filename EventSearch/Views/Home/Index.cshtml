@@ -1,4 +1,4 @@
-﻿@model EventSearch.Models.EventfulMain
+﻿@model EventSearch.Models.Category
 
 @{
     ViewData["Title"] = "Events";
@@ -9,8 +9,17 @@
 
 <form asp-action="Search" method="post">
     <div class="row input-group group">
+
+        <div>
+            <label asp-for="CategoryName" class="control-label"></label>
+            <select asp-for="CategoryId"
+                    class="form-control"
+                    asp-items="@(new SelectList(@ViewBag.ListofCategory,"CategoryId", "CategoryName"))"></select>
+        </div>
+
         <input type="text" name="location" id="location" class="form-control" />
-        <input type="text" name="category" id="category" class="form-control" />
+        @*<input type="text" name="category" id="category" class="form-control" />*@
+
         <input type="text" name="miles" id="miles" class="form-control" />
         <input type="date" name="startDate" id="startDate" class="form-control" />
         <input type="date" name="endDate" id="endDate" class="form-control" />

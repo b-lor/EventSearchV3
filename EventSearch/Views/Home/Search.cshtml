@@ -3,32 +3,29 @@
     Layout = null;
 }
 
-<table style="width:90%">
-    <tr>
-        <th>Event</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-    </tr>
-
-    @foreach (var item in Model.events.Event)
-    {
+<table class="table table-hover">
+    <thead>
         <tr>
-            <td><a href="@item.url" target="_blank"><b>@item.title</b></a></td>
-            <td>@item.start_time</td>
-            <td>@item.stop_time</td>
+            <th>Event</th>
+            <th>Address</th>
+            <th>Start Time</th>
+            <th>End Time</th>
         </tr>
+    </thead>
 
-        <tr>
-            <td>@item.venue_address, @item.city_name, @item.region_name</td>
-        </tr>
+    <tbody>
+        @foreach (var item in Model.events.Event)
+        {
+            <tr>
+                <td><a href="@item.url" target="_blank"><b>@item.title</b></a></td>
+                <td>@item.venue_address</td>
+                <td>@item.start_time</td>
+                <td>@item.stop_time</td>
+            </tr>
 
-        <tr>
-            <td>
-                <p></p>
-            </td>
-        </tr>
+        }
+    </tbody>
 
-    }
 </table>
 
 

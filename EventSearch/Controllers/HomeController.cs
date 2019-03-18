@@ -9,11 +9,18 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
+using EventSearch.Data;
 
 namespace EventSearch.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public string Location { get; set; }
         public string Category { get; set; }
@@ -23,6 +30,13 @@ namespace EventSearch.Controllers
 
         public IActionResult Index()
         {
+            List<Category> categories = new List<Category>();
+            categories = (from category in _context.Category
+                          select category).ToList();
+            categories.Insert(0, new Category { CategoryId = 0, CategoryName = "Select a Category" });
+
+            ViewBag.ListOfCategory = categories;
+
             return View();
         }
 
@@ -75,6 +89,10 @@ namespace EventSearch.Controllers
 
             return View(eventful);
         }
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
