@@ -1,0 +1,10 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>List</h2>
+@foreach (var item in Model)
+{
+    <img src="@Url.Content(item.Replace("wwwroot","~"))" /> <br />
+}

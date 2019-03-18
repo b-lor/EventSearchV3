@@ -16,4 +16,9 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
 </Project>

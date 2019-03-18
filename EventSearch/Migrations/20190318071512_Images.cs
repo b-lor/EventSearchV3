@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EventSearch.Data.Migrations
+namespace EventSearch.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class Images : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,74 @@ namespace EventSearch.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CategoryName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cuisine",
+                columns: table => new
+                {
+                    CuisineId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CuisineName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cuisine", x => x.CuisineId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Establishment",
+                columns: table => new
+                {
+                    EstablishmentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EstablishmentName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Establishment", x => x.EstablishmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Caption = table.Column<string>(nullable: true),
+                    URL = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,6 +277,21 @@ namespace EventSearch.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Cuisine");
+
+            migrationBuilder.DropTable(
+                name: "Establishment");
+
+            migrationBuilder.DropTable(
+                name: "Image");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EventSearch.Data.Migrations
+namespace EventSearch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -75,6 +75,20 @@ namespace EventSearch.Data.Migrations
                     b.HasKey("EstablishmentId");
 
                     b.ToTable("Establishment");
+                });
+
+            modelBuilder.Entity("EventSearch.Models.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Caption");
+
+                    b.Property<string>("URL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -18,6 +18,7 @@ namespace EventSearch.Data
         public DbSet<Establishment> Establishment { get; set; }
 
         public DbSet<Category> Category { get; set; }
+        public DbSet<Image> Image { get; set; }
 
     }
 }
