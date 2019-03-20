@@ -10,94 +10,88 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using EventSearch.Data;
+using Restaurants;
+using Newtonsoft.Json;
 
 namespace EventSearch.Controllers
 {
     public class HomeController : Controller
     {
+        public static string apikey = "d9d2ad9c6bb2b26f98f4db8c581a6a17";
+
+
         private readonly ApplicationDbContext _context;
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        public string Location { get; set; }
-        public string Category { get; set; }
-        public int Miles { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-
         public IActionResult Index()
         {
-            List<Category> categories = new List<Category>();
-            categories = (from category in _context.Category
-                          select category).ToList();
-            categories.Insert(0, new Category { CategoryId = 0, CategoryName = "Select a Category" });
+            //ViewModel viewmodel = new ViewModel();
+            //var result = from user in _context.Likes
+            //             group user by new { user.AdventurePostId } into g
+            //             select new { g.Key.AdventurePostId, UserLikes = g.Count() };
 
-            ViewBag.ListOfCategory = categories;
+            //var postIds = _context.Likes.Select(l => l.AdventurePostId).Distinct();
+            //var adventurePostsWithLikes = _context.AdventuresPost.Where(ap => postIds.Contains(ap.PostId)).ToList();
+
+            //// make new dictionary
+            //Dictionary<AdventurePost, int> postsWithLikeCount = new Dictionary<AdventurePost, int>();
+
+            //for (int i = 0; i < adventurePostsWithLikes.Count(); i++)
+            //{
+            //    int matchingpostwithlikes = result.Where(r => r.AdventurePostId == adventurePostsWithLikes[i].PostId).Select(r => r.UserLikes).SingleOrDefault();
+            //    postsWithLikeCount.Add(adventurePostsWithLikes[i], matchingpostwithlikes);
+            //}
+            //var dictionary = postsWithLikeCount.OrderByDescending(p => p.Value);
+
+            return View(/*dictionary*/);
+        }
+
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-
-        public IActionResult Search(string location, string category, int miles, DateTime? startDate, DateTime? endDate)
+        public IActionResult Contact()
         {
-            string apiKey = "kdRmzVqLVwJBfRnB";
-            int pageSize = 100;
+            ViewData["Message"] = "Your contact page.";
 
-            if (!string.IsNullOrEmpty(location))
-            {
-                Location = location;
-            }
-
-            if (!string.IsNullOrEmpty(category))
-            {
-                Category = category;
-            }
-
-            if (miles > 0)
-            {
-                Miles = miles;
-            }
-
-            if (startDate.HasValue)
-            {
-                StartDate = (DateTime)startDate;
-            }
-
-            if (endDate.HasValue)
-            {
-                EndDate = (DateTime)endDate;
-            }
-
-            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&within=" + Miles + "&units=miles&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
-
-
-
-            WebResponse response = request.GetResponse();
-
-            Stream stream = response.GetResponseStream();
-
-            StreamReader reader = new StreamReader(stream);
-
-            string responseFromServer = reader.ReadToEnd();
-
-            JObject parsedString = JObject.Parse(responseFromServer);
-
-            EventfulMain eventful = parsedString.ToObject<EventfulMain>();
-
-            return View(eventful);
+            return View();
         }
 
-
-
-
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public void GetAPIKey()
+        {
+            // CreateWebHostBuilder(args).Build().Run();
+            HttpWebRequest webRequest = WebRequest.Create("https://api.zomato.com/v2.1/Restaurant/restaurant") as HttpWebRequest;
+            HttpWebResponse webResponse = null;
+            webRequest.Headers.Add("X-Zomato-API-Key", apikey);
+            //you can get KeyValue by registering with Zomato.
+            webRequest.Method = "GET";
+            webResponse = (HttpWebResponse)webRequest.GetResponse();
+            if (webResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
+                string responseData = responseReader.ReadToEnd();
+                Restaurant restaurant = JsonConvert.DeserializeObject<Restaurant>(responseData);
+                Console.WriteLine();
+                Console.ReadLine();
+                // CreateWebHostBuilder(args).Build().Run();
+            }
         }
     }
 }
