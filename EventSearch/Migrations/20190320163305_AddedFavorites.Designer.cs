@@ -4,14 +4,16 @@ using EventSearch.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventSearch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190320163305_AddedFavorites")]
+    partial class AddedFavorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,25 +191,6 @@ namespace EventSearch.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Image");
-                });
-
-            modelBuilder.Entity("EventSearch.Models.LikesTable", b =>
-                {
-                    b.Property<int>("LikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AdventurePostId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("LikeId");
-
-                    b.HasIndex("AdventurePostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -407,18 +390,6 @@ namespace EventSearch.Migrations
                     b.HasOne("EventSearch.Models.Adventure", "Adventure")
                         .WithMany()
                         .HasForeignKey("AdventureId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EventSearch.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EventSearch.Models.LikesTable", b =>
-                {
-                    b.HasOne("EventSearch.Models.AdventurePost", "AdventurePost")
-                        .WithMany()
-                        .HasForeignKey("AdventurePostId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("EventSearch.Models.ApplicationUser", "ApplicationUser")
