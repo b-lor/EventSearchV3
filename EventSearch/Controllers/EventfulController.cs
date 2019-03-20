@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using EventSearch.Data;
 using EventSearch.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -13,18 +14,33 @@ namespace EventSearch.Controllers
 {
     public class EventfulController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public EventfulController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public string Location { get; set; }
         public string Category { get; set; }
+        public int Miles { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
         public IActionResult Index()
         {
+            List<Category> categories = new List<Category>();
+            categories = (from category in _context.Category
+                          select category).ToList();
+            categories.Insert(0, new Category { CategoryId = 0, CategoryName = "Select a Category" });
+
+            ViewBag.ListOfCategory = categories;
+
             return View();
         }
 
 
-        public IActionResult Search(string location, string category, DateTime? startDate, DateTime? endDate)
+        public IActionResult Search(string location, string category, int miles, DateTime? startDate, DateTime? endDate)
         {
             string apiKey = "kdRmzVqLVwJBfRnB";
             int pageSize = 100;
@@ -39,6 +55,11 @@ namespace EventSearch.Controllers
                 Category = category;
             }
 
+            if (miles > 0)
+            {
+                Miles = miles;
+            }
+
             if (startDate.HasValue)
             {
                 StartDate = (DateTime)startDate;
@@ -49,7 +70,7 @@ namespace EventSearch.Controllers
                 EndDate = (DateTime)endDate;
             }
 
-            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
+            WebRequest request = WebRequest.Create("http://api.eventful.com/json/events/search?app_key=" + apiKey + "&location=" + Location + "&within=" + Miles + "&units=miles&q=" + Category + "&date=" + StartDate.ToString("yyyyMMdd00") + "-" + EndDate.ToString("yyyyMMdd00") + "&page_size=" + pageSize + "&sort_order=start_time&sort_direction=descending");
 
 
 
