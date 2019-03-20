@@ -1,0 +1,47 @@
+﻿@model EventSearch.Models.ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/FavoriteEvents/YourProfile.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.adventure.EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adventure.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adventure.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adventure.Location)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Favorites) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adventure.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adventure.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adventure.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adventure.Location)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.FavoriteId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
