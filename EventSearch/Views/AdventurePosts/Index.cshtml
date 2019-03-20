@@ -1,0 +1,74 @@
+﻿@model IEnumerable<EventSearch.Models.AdventurePost>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html class="page">
+<head>
+
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", "Adventures", new { userid = ViewData["userid"], id = item.PostId })
+                    @*<button type="button" class="btn" value="@item.PostId">Select</button>*@
+                </td>
+                <td>
+                    @Html.ActionLink("Comment", "Create", "CommentsTables", new { userid = ViewData["userid"], id = item.PostId })
+                </td>
+                <td>
+                    @Html.ActionLink("Like", "Create", "LikesTables", new { userid = ViewData["userid"], id = item.PostId })
+                </td>
+                <td>
+                    @Html.ActionLink("View Likes", "Index", "LikesTables", new { userid = ViewData["userid"], id = item.PostId })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/js/Grid.js"></script>
+</body>
+</html>
+
+<script>
+
+    //$(document).ready(function () {
+    //    $(".btn").click(function () {
+    //        var selectedid = $(this).val();
+    //        $.ajax({
+    //            type: 'GET',
+    //            data: { "id": selectedid },
+    //            url: "/Adventures/Index",
+    //            success: function (data) {
+    //                $(".page").html(data);
+    //            }
+    //        });
+    //    });
+    //});
+
+</script>
