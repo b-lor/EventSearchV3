@@ -97,6 +97,7 @@ namespace EventSearch.Controllers
             return View(adventure);
         }
 
+
         // GET: Adventures/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
