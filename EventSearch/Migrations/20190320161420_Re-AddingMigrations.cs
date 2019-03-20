@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventSearch.Migrations
 {
-    public partial class Images : Migration
+    public partial class ReAddingMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,11 +108,25 @@ namespace EventSearch.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Caption = table.Column<string>(nullable: true),
-                    URL = table.Column<string>(nullable: true)
+                    ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Image", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: true),
+                    isAdmin = table.Column<bool>(nullable: false),
+                    isUser = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.FirstName);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +306,9 @@ namespace EventSearch.Migrations
 
             migrationBuilder.DropTable(
                 name: "Image");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -13,6 +13,6 @@ namespace EventSearch.Models
 
         public string Caption { get; set; }
 
-        public string URL { get; set; }
+        public string ImagePath { get; set; }
     }
 }

@@ -43,7 +43,7 @@ namespace EventSearch.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormCollection form)
         {
-            string storePath = "wwwroot/Image/";
+            string storePath = "wwwroot/images/";
             if (form.Files == null || form.Files[0].Length == 0)
                 return RedirectToAction("Index");
 

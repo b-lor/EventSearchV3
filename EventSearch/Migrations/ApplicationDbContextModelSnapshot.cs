@@ -15,9 +15,25 @@ namespace EventSearch.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EventSearch.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("FirstName")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LastName");
+
+                    b.Property<bool>("isAdmin");
+
+                    b.Property<bool>("isUser");
+
+                    b.HasKey("FirstName");
+
+                    b.ToTable("User");
+                });
 
             modelBuilder.Entity("EventSearch.Models.Category", b =>
                 {
@@ -84,7 +100,7 @@ namespace EventSearch.Migrations
 
                     b.Property<string>("Caption");
 
-                    b.Property<string>("URL");
+                    b.Property<string>("ImagePath");
 
                     b.HasKey("Id");
 
