@@ -1,0 +1,52 @@
+﻿@model EventSearch.Models.ViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LikedEvents</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.adventure.EventName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.adventure.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.adventure.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.adventure.Description)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.adventures)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
