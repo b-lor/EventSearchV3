@@ -20,6 +20,8 @@ namespace EventSearch.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Image> Image { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
+        public DbSet<Adventure> AdventuresTable { get; set; }
+        public DbSet<AdventurePost> AdventuresPost { get; set; }
 
 
     }
