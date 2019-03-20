@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace EventSearch.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
-        [Key]
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool isAdmin { get; set; }
