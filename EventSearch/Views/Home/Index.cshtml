@@ -1,36 +1,38 @@
-﻿@model EventSearch.Models.Category
+﻿
 
 @{
-    ViewData["Title"] = "Events";
+    ViewData["Title"] = "Home Page";
 }
 
-<h2>Search for upcoming Events...</h2>
+<html>
+<head>
 
-
-<form asp-action="Search" method="post">
-    <div class="row input-group group">
-
-        <div>
-            <label asp-for="CategoryName" class="control-label"></label>
-            <select asp-for="CategoryId"
-                    class="form-control"
-                    asp-items="@(new SelectList(@ViewBag.ListofCategory,"CategoryId", "CategoryName"))"></select>
-        </div>
-
-        <input type="text" name="location" id="location" class="form-control" />
-        <input type="text" name="miles" id="miles" class="form-control" />
-        <input type="date" name="startDate" id="startDate" class="form-control" />
-        <input type="date" name="endDate" id="endDate" class="form-control" />
-    </div>
-    <div class="input-group-btn">
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </div>
-</form>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function (event) {
-        document.getElementById('miles').value = 25;
-    });
-</script>
-
-
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">EventsMedia</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Restaurants" asp-action="GetCity">Search a City</a></li>
+                        <li><a asp-area="" asp-controller="AdventurePosts" asp-action="Create">Post and Adventure</a></li>
+                        <li><a asp-area="" asp-controller="Eventful" asp-action="Index">Eventful</a></li>
+                        <li><a asp-area="" asp-controller="AdventurePosts" asp-action="Index">Adventure Posts</a></li>
+                        <li><a asp-area="" asp-controller="FavoriteEvents" asp-action="Index">Your Favorites</a></li>
+                        <li><a asp-area="" asp-controller="AdventurePosts" asp-action="YourProfile">Your Profile</a></li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+</body>
+</html>
