@@ -2,6 +2,12 @@
 @{
     Layout = null;
 }
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+<link href="~/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+
 
 <table class="table table-hover">
     <thead>
@@ -9,24 +15,26 @@
             <th>Event</th>
             <th>Address</th>
             <th>Start Time</th>
-            <th>End Time</th>
+            @*<th>End Time</th>*@
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in Model.events.Event)
+        @foreach (var item in ViewBag.Model)
         {
             <tr>
                 <td><a href="@item.url" target="_blank"><b>@item.title</b></a></td>
                 <td>@item.venue_address</td>
                 <td>@item.start_time</td>
-                <td>@item.stop_time</td>
+                @*<td>@item.stop_time</td>*@
             </tr>
 
         }
     </tbody>
 
 </table>
+
+@Html.PagedListPager((IPagedList)ViewBag.Model, page => Url.Action("Search", new { page }))
 
 
 <style>
@@ -45,7 +53,7 @@
                             zoom: 14,
                             center: latLng
                         });
-                            @foreach(var location in Model.events.Event)
+                            @foreach(var location in ViewBag.Model)
                             {
                             <text>
                 var eventName = "@location.title";

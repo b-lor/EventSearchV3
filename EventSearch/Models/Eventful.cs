@@ -30,7 +30,7 @@ namespace EventSearch.Models
         //public string start_time { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime? start_time { get; set; }
+        public DateTime start_time { get; set; }
 
         public object tz_id { get; set; }
         public string description { get; set; }
@@ -54,7 +54,7 @@ namespace EventSearch.Models
         //public string stop_time { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime? stop_time { get; set; }
+        public DateTime stop_time { get; set; }
         public string venue_name { get; set; }
         public string venue_url { get; set; }
     }

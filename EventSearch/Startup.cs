@@ -41,7 +41,7 @@ namespace EventSearch
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
-
+            services.AddSession();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -65,7 +65,7 @@ namespace EventSearch
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
