@@ -8,6 +8,7 @@ namespace EventSearch.Models
 {
     public class Event
     {
+        public bool Selected { get; set; }
         public object watching_count { get; set; }
         public string olson_path { get; set; }
         public object calendar_count { get; set; }

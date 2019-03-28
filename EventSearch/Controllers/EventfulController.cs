@@ -112,9 +112,7 @@ namespace EventSearch.Controllers
             JObject parsedString = JObject.Parse(responseFromServer);
 
             //EventfulMain eventful = parsedString.ToObject<EventfulMain>();
-            
 
-            
 
             int totalEventCount;
 
@@ -128,11 +126,13 @@ namespace EventSearch.Controllers
                     {
                         title = (string)ev["title"],
                         venue_address = (string)ev["venue_address"],
+                        city_name = (string)ev["city_name"],
                         start_time = (DateTime)ev["start_time"],
                         //stop_time = (DateTime)ev["stop_time"],
                         latitude = (string)ev["latitude"],
                         longitude = (string)ev["longitude"],
-                        url = (string)ev["url"]
+                        url = (string)ev["url"],
+                        description = (string)ev["description"]
                     };
                     events.Add(e);
                 }
